@@ -1,7 +1,20 @@
 import React,{useEffect, useState} from 'react'
-import {Card,Container,Row,Col} from 'react-bootstrap';
 import axios from 'axios';
 import Loading from './Loading';
+import MuiCom from './MuiCom';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
+
+const Item = styled(MuiCom)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
 
 
 
@@ -18,25 +31,22 @@ export default function FuctionCom() {
 
   return (
     <div>
-        <Container>
-            {Load 
-            ?  
-            <Row>
+        <Container maxWidth="lg">
+        
+            { Load 
+            ?
+            <Grid container spacing={1}>
                 {Books.map((book)=>(
-                    <Col key={book.id} >
-                        <Card style={{ width: '18rem' ,margin:'0.3rem'}}>
-                            <Card.Body>
-                                <Card.Title>{book.title}</Card.Title>
-                                <Card.Text>{book.body}</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                    <Grid item lg={3} sm={2}>
+                        <Item title= {book.title} body={book.body}></Item>
+                    </Grid>
                 ))}
-            </Row>
-            :  <Loading />
+            </Grid>
+            :  
+            <Loading />
             }
+        
         </Container>
-
     </div>
   )
 }
